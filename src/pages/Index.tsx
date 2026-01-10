@@ -11,6 +11,10 @@ import img1 from "@/assets/mainpage-1.png";
 import img2 from "@/assets/mainpage-2.png";
 import img3 from "@/assets/mainpage-3.png";
 import img4 from "@/assets/mainpage-4.png";
+import img5 from "@/assets/mainpage-5.png";
+import img6 from "@/assets/mainpage-6.png";
+import img7 from "@/assets/mainpage-7.png";
+import img8 from "@/assets/mainpage-8.png";
 
 const storyBlocks = [
   {
@@ -44,9 +48,9 @@ const storyBlocks = [
 ];
 
 const featuredDishes = [
-  { name: "Mezze Platter", description: "A selection of traditional appetizers", image: img1 },
-  { name: "Lamb Chops", description: "Grilled to perfection with herbs", image: img2 },
-  { name: "Saffron Rice", description: "Aromatic basmati with almonds", image: img3 },
+  { name: "Big Daddy Mandi", description: "A grand platter of fragrant basmati rice slow-cooked with tender, generously seasoned meat, infused with traditional spices and finished with roasted nuts for a bold, celebratory feast.", image: img5 },
+  { name: "Murg Musallam Mandi", description: "Whole chicken marinated in aromatic spices, slow-roasted to juicy perfection and served atop long-grain basmati rice, delicately perfumed and garnished with roasted onions and spices.", image: img6 },
+  { name: "Mutton Shoulder Mandi", description: "Succulent mutton shoulder cooked low and slow until melt-in-the-mouth tender, paired with richly spiced basmati rice and finished with a nutty garnish for a deeply comforting experience.", image: img7 },
 ];
 const heroImages = [heroImage1, heroImage2, heroImage3, heroImage4];
 
@@ -213,9 +217,8 @@ const Index = () => {
         </div>
       </section>
 
-
       {/* Featured Dishes */}
-      <section className="py-24 bg-secondary">
+      <section className="py-12 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <p className="text-gold font-medium tracking-[0.2em] uppercase mb-2">
@@ -226,20 +229,28 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
             {featuredDishes.map((dish, index) => (
               <div
                 key={dish.name}
-                className="group relative overflow-hidden rounded-lg aspect-square"
+                className="relative pt-28"
               >
-                <img
-                  src={dish.image}
-                  alt={dish.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-xl font-heading font-semibold text-foreground mb-1">
+                <div className="absolute left-1/2 -translate-x-1/2 -top-1 w-52 h-52 rounded-full overflow-hidden shadow-xl z-10">
+                  <img
+                    src={dish.image}
+                    alt={dish.name}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  />
+                </div>
+
+                <div className="
+                    bg-background rounded-lg p-6 pt-28 text-center
+                    shadow-[0_5px_20px_rgba(212,175,55,0.25)]
+                    hover:shadow-[0_15px_40px_rgba(212,175,55,0.45)]
+                    transition-shadow duration-300 hover:ring-1 hover:ring-[rgba(212,175,55,0.4)]
+
+                  ">
+                  <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
                     {dish.name}
                   </h3>
                   <p className="text-muted-foreground text-sm">{dish.description}</p>
@@ -257,8 +268,8 @@ const Index = () => {
             </Button>
           </div>
         </div>
-      </section>
-
+      </section
+      >
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-burgundy/20" />
