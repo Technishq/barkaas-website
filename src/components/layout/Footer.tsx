@@ -156,8 +156,20 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-12 pt-8 text-center text-muted-foreground text-sm">
-          <p>&copy; {new Date().getFullYear()} Designed & Developed by Madtales AI Pvt LTd. All rights reserved.</p>
+        <div className="border-t border-border mt-12 pt-8 text-center text-sm">
+          <p className="text-muted-foreground">
+            &copy; {new Date().getFullYear()}{' '}
+            Designed & Developed by  {' '}
+            <a 
+              href="https://madtalesai.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-semibold text-gold hover:text-gold/80 transition-colors"
+            >
+               Madtales AI Pvt Ltd.
+            </a>{' '}
+            All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
