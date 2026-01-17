@@ -3,5 +3,8 @@ import App from "./App.tsx";
 import "./index.css";
 import { pdfjs } from 'react-pdf'
 
-pdfjs.disableWorker = true
+// pdfjs.disableWorker = true //support lapse??
+
+pdfjs.GlobalWorkerOptions.workerSrc =
+  `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 createRoot(document.getElementById("root")!).render(<App />);
