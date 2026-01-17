@@ -81,8 +81,8 @@ const Menu = () => {
                 clickEventForward={true}
                 swipeDistance={30}
                 useMouseEvents={true}
-                width={650}
-                height={900}
+                width={250}
+                height={450}
                 size="stretch"
                 minWidth={380}
                 maxWidth={850}
@@ -99,7 +99,7 @@ const Menu = () => {
                 {Array.from({ length: numPages }, (_, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-center p-6"
+                    className="flex items-center justify-center p-6 bg-secondary"
                   >
                     <Page
                       pageNumber={index + 1}
