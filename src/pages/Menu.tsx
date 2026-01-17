@@ -4,6 +4,9 @@ import { ChevronLeft, ChevronRight, FileText } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 import PageFlip from "react-pageflip";
 import { Button } from "@/components/ui/button";
+import foodPdf from "@/assets/menu/food.pdf";
+import drinksPdf from "@/assets/menu/drinks.pdf";
+
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -18,15 +21,15 @@ const Menu = () => {
   const [activeTab, setActiveTab] = useState<"food" | "beverage">("food");
 
   const menus = {
-    food: {
-      title: "Food Menu",
-      pdfUrl: "/food.pdf",
-    },
-    beverage: {
-      title: "Beverage Menu",
-      pdfUrl: "/drinks.pdf",
-    },
-  };
+  food: {
+    title: "Food Menu",
+    pdfUrl: foodPdf, 
+  },
+  beverage: {
+    title: "Beverage Menu",
+    pdfUrl: drinksPdf,
+  },
+};
   console.log(menus.food.pdfUrl);
   const FlipBook = ({
     pdfUrl,

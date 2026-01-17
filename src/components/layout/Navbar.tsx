@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo-navbar.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -24,7 +25,7 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl md:text-3xl font-heading font-bold text-gradient-gold">
               <img
-                src="src/assets/logo-navbar.png"
+                src={logo}
                 alt="Barkaas Logo"
                 className="h-24 w-24"
               />

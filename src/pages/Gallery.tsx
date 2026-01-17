@@ -9,15 +9,14 @@ const Gallery = () => {
   const [galleryImages, setGalleryImages] = useState<{ id: number; src: string; alt: string; category: string }[]>([]);
 
   useEffect(() => {
-     const ambienceModules = import.meta.glob<{ default: string }>('/src/assets/ambience/*.{jpg,jpeg,png,webp}', { eager: true });
+    const ambienceModules = import.meta.glob<{ default: string }>('/src/assets/ambience/*.{jpg,jpeg,png,webp}', { eager: true });
     const foodModules = import.meta.glob<{ default: string }>('/src/assets/food/*.{jpg,jpeg,png,webp}', { eager: true });
 
     const ambienceImages = Object.entries(ambienceModules).map(([path, mod], index) => {
       const fileName = path.split('/').pop()?.split('.')[0] || `ambience-${index}`;
-      const url = (mod as { default: string }).default;
       return {
         id: index + 1,
-        src: url,
+        src: mod.default, 
         alt: `${fileName.charAt(0).toUpperCase() + fileName.slice(1)} - Restaurant Interior`,
         category: "Ambiance" as const
       };
@@ -25,10 +24,9 @@ const Gallery = () => {
 
     const foodImages = Object.entries(foodModules).map(([path, mod], index) => {
       const fileName = path.split('/').pop()?.split('.')[0] || `food-${index}`;
-      const url = (mod as { default: string }).default;
       return {
         id: ambienceImages.length + index + 1,
-        src: url,
+        src: mod.default, 
         alt: `${fileName.charAt(0).toUpperCase() + fileName.slice(1)} Dish`,
         category: "Food" as const
       };
@@ -36,6 +34,7 @@ const Gallery = () => {
 
     setGalleryImages([...ambienceImages, ...foodImages]);
   }, []);
+
 
   const categories = ["All", "Food", "Ambiance"];
 

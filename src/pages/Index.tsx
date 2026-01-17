@@ -73,7 +73,12 @@ const featuredDishes = [
   { name: "Murg Musallam Mandi", description: "Whole chicken marinated in aromatic spices, slow-roasted to juicy perfection and served atop long-grain basmati rice, delicately perfumed and garnished with roasted onions and spices.", image: img6 },
   { name: "Mutton Shoulder Mandi", description: "Succulent mutton shoulder cooked low and slow until melt-in-the-mouth tender, paired with richly spiced basmati rice and finished with a nutty garnish for a deeply comforting experience.", image: img7 },
 ];
-const heroImages = [heroImage1, heroImage2, heroImage3, heroImage4];
+const heroImages = [
+  new URL(heroImage1, import.meta.url).href,
+  new URL(heroImage2, import.meta.url).href,
+  new URL(heroImage3, import.meta.url).href,
+  new URL(heroImage4, import.meta.url).href,
+];
 
 const Index = () => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);

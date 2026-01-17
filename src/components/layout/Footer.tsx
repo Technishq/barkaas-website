@@ -8,7 +8,7 @@ import {
   Popup 
 } from 'react-leaflet';
 import { Icon } from 'leaflet';
-import L from 'leaflet';
+import logo from "@/assets/logo-navbar.png";
 
 // Custom gold marker for Barkaas
 const barkaasIcon = new Icon({
@@ -240,7 +240,7 @@ export const Footer = () => {
             <Link to="/" className="flex items-center gap-2">
               <span className="text-2xl md:text-3xl font-heading font-bold text-gradient-gold">
                 <img
-                  src="src/assets/logo-navbar.png"
+                  src={logo}
                   alt="Barkaas Logo"
                   className="h-16 w-16"
                 />
