@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Heart, Leaf } from "lucide-react";
 import img1 from "@/assets/about-1.png";
 import img2 from "@/assets/about-2.png";
-import img3 from "@/assets/food/SMP_4117.jpg";
-import img4 from "@/assets/food/SMP_4249.jpg";
-import img5 from "@/assets/food/SMP_4261.jpg";
-import img6 from "@/assets/food/SMP_3900.jpg";
-import img7 from "@/assets/food/SMP_3896.jpg";
-import img9 from "@/assets/food/SMP_4160.jpg";
+import img3 from "@/assets/SMP_4117.jpg";
+import img4 from "@/assets/SMP_4249.jpg";
+import img5 from "@/assets/SMP_4261.jpg";
+import img6 from "@/assets/SMP_3900.jpg";
+import img7 from "@/assets/SMP_3896.jpg";
+import img9 from "@/assets/SMP_4160.jpg";
 import img8 from "@/assets/about-3.png";
 
 const values = [
