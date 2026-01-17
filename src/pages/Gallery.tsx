@@ -9,8 +9,8 @@ const Gallery = () => {
   const [galleryImages, setGalleryImages] = useState<{ id: number; src: string; alt: string; category: string }[]>([]);
 
   useEffect(() => {
-     const ambienceModules = import.meta.glob<{ default: string }>('/src/assets/*.{jpg,jpeg,png,webp}', { eager: true });
-    const foodModules = import.meta.glob<{ default: string }>('/src/assets/*.{jpg,jpeg,png,webp}', { eager: true });
+     const ambienceModules = import.meta.glob<{ default: string }>('/src/assets/ambience/*.{jpg,jpeg,png,webp}', { eager: true });
+    const foodModules = import.meta.glob<{ default: string }>('/src/assets/food/*.{jpg,jpeg,png,webp}', { eager: true });
 
     const ambienceImages = Object.entries(ambienceModules).map(([path, mod], index) => {
       const fileName = path.split('/').pop()?.split('.')[0] || `ambience-${index}`;
