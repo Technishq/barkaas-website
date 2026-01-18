@@ -164,8 +164,12 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="gold" size="xl" asChild>
-                <Link to="/book">
+                {/* <Link to="/book">
                   Reserve Your Table
+                  <ArrowRight className="ml-2" size={20} />
+                </Link> */}
+                 <Link to="/about">
+                  Learn more about us
                   <ArrowRight className="ml-2" size={20} />
                 </Link>
               </Button>
@@ -378,8 +382,12 @@ const Index = () => {
               Reserve your table today and create memories that last a lifetime.
             </p>
             <Button variant="gold" size="xl" asChild>
-              <Link to="/book">
+              {/* <Link to="/book">
                 Book Your Table Now
+                <ArrowRight className="ml-2" size={20} />
+              </Link> */}
+              <Link to="/about">
+                Know more
                 <ArrowRight className="ml-2" size={20} />
               </Link>
             </Button>
