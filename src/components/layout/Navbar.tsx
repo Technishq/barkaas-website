@@ -8,7 +8,7 @@ import logo from "@/assets/logo-navbar.png";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "Menu", path: "/menu" },
-  { name: "Book a Table", path: "/book" },
+  // { name: "Book a Table", path: "/book" },
   { name: "About Us", path: "/about" },
   { name: "Gallery", path: "/gallery" },
 ];
@@ -52,9 +52,14 @@ export const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* <div className="hidden md:block">
             <Button variant="gold" size="sm" asChild>
               <Link to="/book">Reserve Now</Link>
+            </Button>
+          </div> */}
+          <div className="hidden md:block">
+            <Button variant="gold" size="sm" asChild>
+              <Link to="/about">Know more</Link>
             </Button>
           </div>
 
@@ -87,9 +92,14 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <Button variant="gold" size="sm" className="mt-2" asChild>
+              {/* <Button variant="gold" size="sm" className="mt-2" asChild>
                 <Link to="/book" onClick={() => setIsOpen(false)}>
                   Reserve Now
+                </Link>
+              </Button> */}
+              <Button variant="gold" size="sm" className="mt-2" asChild>
+                <Link to="/about" onClick={() => setIsOpen(false)}>
+                  Know more
                 </Link>
               </Button>
             </div>
