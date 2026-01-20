@@ -10,6 +10,7 @@ import img5 from "@/assets/food/SMP_4261.jpg";
 import img6 from "@/assets/food/SMP_3900.jpg";
 import img7 from "@/assets/food/SMP_3896.jpg";
 import img9 from "@/assets/food/SMP_4160.jpg";
+import img10 from "@/assets/ambience/RON3063.jpg";
 import img8 from "@/assets/about-3.png";
 
 const values = [
@@ -46,7 +47,7 @@ const About = () => {
                 Welcome to Barkaas
               </h1>
               <p className="text-muted-foreground max-w-2xl mx-auto lg:mx-0 animate-[fadeInUp_0.8s_ease-out_0.5s_both]">
-                Spanning over 32 cities and continuously expanding, Barkaas is a prominent name in authentic Indo-Arabic cuisine, with vibrant establishments in key cities such as Bangalore, Hyderabad, Vishakhapatnam, Kolkata, and Lucknow. Our widespread presence across the nation highlights our dedication to delivering unparalleled culinary experiences, ensuring that every corner of India can savour the true essence of our exquisite flavors. With a secret recipe that is replicated across all restaurants, Barkaas is a legendary story waiting to be experienced.
+                Spanning over 32 locations and continuously expanding, Barkaas is a prominent name in authentic Indo-Arabic cuisine, with vibrant establishments in key cities such as Bangalore, Hyderabad, Vishakhapatnam, Kolkata, Patna, Aligarh, Indore and Lucknow. Our widespread presence across the nation highlights our dedication to delivering unparalleled culinary experiences, ensuring that every corner of India can savour the true essence of our exquisite flavors. With a secret recipe that is replicated across all restaurants, Barkaas is a legendary story waiting to be experienced.
               </p>
             </div>
             {/* Right: Hero image */}
@@ -79,7 +80,7 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p className="animate-[fadeIn_0.8s_ease-out_0.4s_both]">
-                  Get lost in the tingling aroma of our traditional Mandi as you enter a world of blended
+                  Get lost in the tingling aroma of our traditional Mandi and Biryani as you enter a world of blended
                   paradise. Immerse yourself in a dining experience where the rich legacies of Mughal and
                   Afghani cultures converge to craft a truly memorable feast.
                 </p>
@@ -95,6 +96,34 @@ const About = () => {
           </div>
         </div>
       </section>
+
+    {/* Seatings */}
+    <section className="py-16 bg-secondary">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="animate-[fadeInLeft_0.8s_ease-out]">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-6">
+              Our Majlis Seating
+            </h2>
+            <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p className="animate-[fadeIn_0.8s_ease-out_0.4s_both]">
+                  Where Families Gather, Stories Are Shared, and Meals Are Celebrated. At Barkaas, dining is more than just food. It’s a shared experience. Our traditional Majlis-style seating brings families and friends together the way it was always meant to be: seated close, connected, and comfortable.
+                </p>
+                <p className="animate-[fadeIn_0.8s_ease-out_0.6s_both]">
+                  From shared platters to single-plate meals, every dish is enjoyed the traditional way, encouraging togetherness, conversation, and warmth. Whether it’s a quiet family meal or a joyful gathering, our Majlis creates the perfect setting to slow down, share, and savour. Sit together. Eat together. Celebrate together. That’s the Barkaas way.
+                </p>
+              </div>
+          </div>
+          <div className="relative animate-[fadeInRight_0.8s_ease-out_0.3s_both]">
+            <img
+              src={img10}
+              alt="Barkaas Falooda and Desserts"
+              className="w-full transition-transform duration-500 hover:scale-105 border rounded-3xl shadow-xl"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
 
         {/* Secret Masalas */}
         <section className="py-16 bg-burgundy/20">

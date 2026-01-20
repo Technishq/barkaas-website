@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Layout } from "@/components/layout/Layout";
-import { useEffect, useState } from "react";
-import { ArrowRight, Star, Quote, User } from "lucide-react";
+import { useEffect, useState, useCallback } from "react";
+import { ArrowRight, Star, Quote, User, Users, Briefcase, Heart, PartyPopper, ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import heroImage1 from "@/assets/ambience/RON3054.jpg";
 import heroImage2 from "@/assets/ambience/DSC1109.jpg";
 import heroImage3 from "@/assets/ambience/RON3068.jpg";
@@ -15,26 +17,27 @@ import img5 from "@/assets/mainpage-5.png";
 import img6 from "@/assets/mainpage-6.png";
 import img7 from "@/assets/mainpage-7.png";
 
+
 const storyBlocks = [
   {
     title: "The Mandi Story",
     subtitle: "A Legacy",
     description:
-      "At Barkaas, the heart of our kitchen beats to the aroma of mandi. Slow cooked, fire kissed, and deeply spiced, our mandi collection is one of the most extensive you’ll find; each variety rooted in tradition, perfected with care, and served as a true celebration of Indo-Arabian heritage.",
+      "At Barkaas, the heart of our kitchen beats to the aroma of mandi. Slow cooked, fire kissed, and deeply spiced, our mandi collection is one of the most extensive you'll find; each variety rooted in tradition, perfected with care, and served as a true celebration of Indo-Arabian heritage.",
     image: img1,
   },
   {
-    title: "Beyond Mandi, A World of Flavours",
+    title: "Biryani - One of the Most Loved Flavours at Barkaas",
     subtitle: "A Tradition",
     description:
-      "Our story doesn’t end with mandi. Begin with irresistible starters and soul-warming shorbas, then explore smoky charcoal-grilled and tandoori delights crafted to perfection. From rich Indian gravies paired with freshly baked Indian breads to generous platters and aromatic kabsa, Barkaas brings together the best of Arabian and Indian cuisines under one roof. Our biryanis are a story of their own - fragrant basmati rice, rich masalas, and layers of flavor that unfold with every bite.",
+      "Our story doesn't end with mandi. Begin with irresistible starters and soul-warming shorbas, then explore smoky charcoal-grilled and tandoori delights crafted to perfection. From rich Indian gravies paired with freshly baked Indian breads to generous platters and aromatic kabsa, Barkaas brings together the best of Arabian and Indian cuisines under one roof. Our biryanis are a story of their own - fragrant basmati rice, rich masalas, and layers of flavor that unfold with every bite.",
     image: img2,
   },
   {
     title: "Sweet Endings Worth Remembering",
     subtitle: "A Celebration",
     description:
-      "Every great feast deserves a memorable finale. Indulge in our desserts, from crispy, molten kunafa to soft gulab jamun, royal shahi tukda, and comforting kaddu ki kheer. Each sweet is a perfect balance of richness and nostalgia.",
+      "Every great feast deserves a memorable finale. Indulge in our desserts, from crispy, molten kunafa to soft apricot delight, royal shahi tukda, and comforting kaddu ki kheer. Each sweet is a perfect balance of richness and nostalgia.",
     image: img3,
   },
   {
@@ -45,6 +48,31 @@ const storyBlocks = [
     image: img4,
   },
 ];
+
+
+const occasions = [
+  {
+    icon: Users,
+    title: "Family Gatherings",
+    description: "Create lasting memories with your loved ones in our warm, welcoming ambiance designed for families of all sizes.",
+  },
+  {
+    icon: Heart,
+    title: "Friends Get-Togethers",
+    description: "Celebrate friendship over generous platters and authentic flavors that bring everyone together.",
+  },
+  {
+    icon: Briefcase,
+    title: "Corporate Events",
+    description: "Host professional meetings and team celebrations in our spacious setting with impeccable service.",
+  },
+  {
+    icon: PartyPopper,
+    title: "Special Celebrations",
+    description: "From birthdays to anniversaries, make every occasion extraordinary with our grand feasts and festive atmosphere.",
+  },
+];
+
 
 const testimonials = [
   {
@@ -60,12 +88,55 @@ const testimonials = [
     rating: 5,
   },
   {
-    quote: "If you’re in Gachibowli, you have to check out Barkaas Indo Arabic Restaurant! We had an incredible dinner last night—the BBQ starters were seasoned to perfection and the Big Daddy Mandi was absolutely worth the hype. Hands down some of the best Mandi I’ve ever had. Highly recommend.",
-    author: "Sohail Mohammad",
+    quote: "Excellent Mandi after a long time we had in Barkaas Gachibowli . It is located in 4 th floor  comfortable fooor and table seating. . We are of 7 members ordered big daddy Mandi. They served veg fritters, chicken nuggets , French fries , tandoor chicken , chicken tangdi , chicken breast and supreme , fried fish , mutton chops , paya soup, mani rice , mint chutney , garlic sauce , salan , raitha and few other items. We can’t say that single item not good.All r excellent enjoyed a lot. Tq very much to Barkaas team.👌🏼👏",
+    author: "Srinivas Gupta",
     role: "Gachibowli, Hyderabad",
     rating: 5,
   },
+  {
+    quote: "Visited for the first time and absolutely loved the experience, especially the unique seating arrangement and the authentic Arabian vibe. Even as a vegetarian, I really enjoyed the atmosphere and the food. My friends tried the Chicken Mandi and loved it, while I went for naan and paneer — both were delicious. The pricing is decent and worth it for the overall experience. Also, don’t miss the desserts — they have some amazing options to end your meal on a sweet note!",
+    author: "Aman Awasthi",
+    role: "Marathahalli, Bengaluru",
+    rating: 5,
+  },
+  {
+    quote: "I had a wonderful experience at Barkas Restaurant ( Kukatpally).From the moment I arrived, Venky received me very nicely and provided excellent service throughout my visit. He was polite, attentive, and professional. The food was delicious, fresh, and full of flavor. The atmosphere was also very pleasant. I am very satisfied and will definitely visit again. Highly recommended",
+    author: "Ramu Matti",
+    role: "Kukatpally, Hyderabad",
+    rating: 4,
+  },
+  {
+    quote: "Amazing food. Super cute staff. Lovely atmosphere. It’s been a while since I had good food. Thoroughly enjoyed. Please go for the super delicious food. The staff is an add on. Thanks, Hassan ji for hosting.",
+    author: "Ojasvi Nath",
+    role: "Aligarh, Uttar Pradesh",
+    rating: 5,
+  },
+  {
+    quote: "Had a wonderful lunch experience at Barkaas. Mandi Biriyani quantity was very good, a half size can comfortably be right for 3-4 people. All the starters in the veg platter tasted yum! The ambience gives beautiful Arabic feel with shared food experience. Service of staff also was neat. Kunafa for dessert was a sweet touch! Totally recommend!",
+    author: "Divya Jyothsana",
+    role: "SR Nagar, Hyderabad",
+    rating: 5,
+  },
+  {
+    quote: "Had a great experience at Barkaas. The Mandi was flavourful with generous portions — perfectly cooked and aromatic. But the real highlight was the Kunafa — absolutely the showstopper of the meal! Crispy, creamy, and perfectly balanced in sweetness. Definitely worth coming back for!",
+    author: "Sayed Aley Mehdi" ,
+    role: "Gomtinagar, Lucknow",
+    rating: 5,
+  },
+  {
+    quote: "Have tried chicken jafrani kabab and murg mussalam mandi... Really enjoyed the taste of these 2 tasty and delicious items... All the staff members are really very well behaved and cooperative here... If you all want to try some delicious and real taste of biryani and some non veg food items then barkaas is a must visit restaurant here in Frazer road patna...😊 👍",
+    author: "Shainki Gaurav" ,
+    role: "Patna, Bihar",
+    rating: 5,
+  },
+  {
+    quote: "Went for dinner in this newly opened Indo Arabic restaurant in Chinar park. Food was delicious, ambience was good and staff was friendly. Had a nice experience. We had ordered Faham Chicken Mandi, keema naan and apricot delight. For 2 people this was a lot as their food quantity is quite good. A nice place to visit with friends and family if you want some peaceful time away from loud music and with good food. Would recommemd.",
+    author: "Angelika Gupta" ,
+    role: "Chinar Park, Kolkata",
+    rating: 5,
+  },
 ];
+
 
 
 const featuredDishes = [
@@ -73,6 +144,7 @@ const featuredDishes = [
   { name: "Murg Musallam Mandi", description: "Whole chicken marinated in aromatic spices, slow-roasted to juicy perfection and served atop long-grain basmati rice, delicately perfumed and garnished with roasted onions and spices.", image: img6 },
   { name: "Mutton Shoulder Mandi", description: "Succulent mutton shoulder cooked low and slow until melt-in-the-mouth tender, paired with richly spiced basmati rice and finished with a nutty garnish for a deeply comforting experience.", image: img7 },
 ];
+
 const heroImages = [
   new URL(heroImage1, import.meta.url).href,
   new URL(heroImage2, import.meta.url).href,
@@ -80,10 +152,30 @@ const heroImages = [
   new URL(heroImage4, import.meta.url).href,
 ];
 
+
 const Index = () => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [visibleBlocks, setVisibleBlocks] = useState<number[]>([]);
   const [visibleTestimonials, setVisibleTestimonials] = useState(false);
+
+  // Embla Carousel setup
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: 'start',
+      slidesToScroll: 1,
+    },
+    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+  );
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -94,11 +186,14 @@ const Index = () => {
       });
     }, { threshold: 0.1 });
 
+
     const section = document.querySelector('.testimonials-section');
     if (section) observer.observe(section);
 
+
     return () => observer.disconnect();
   }, []);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,8 +214,10 @@ const Index = () => {
     const elements = document.querySelectorAll('[data-story-block]');
     elements.forEach(el => observer.observe(el));
 
+
     return () => observer.disconnect();
   }, [visibleBlocks]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -128,6 +225,7 @@ const Index = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
 
   return (
     <Layout>
@@ -148,27 +246,24 @@ const Index = () => {
           ))}
         </div>
 
+
         <div className="relative z-10 container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto animate-fade-in-up">
             <p className="text-gold font-medium tracking-[0.3em] uppercase mb-4">
               Welcome
             </p>
-            <h1 className="text-3xl md:text-7xl lg:text-5xl font-heading font-bold text-gradient-gold mb-6">
-              Think Mandi, Think Barkaas.
+            <h1 className="text-3xl md:text-6xl lg:text-4xl font-heading font-bold text-gradient-gold mb-6">
+              Think Mandi. Think Biryani. Think Barkaas.
             </h1>
             <p className="text-xl md:text-2xl text-foreground/80 mb-4 font-light">
               India's Largest Indo-Arabic Chain of Restaurants
             </p>
             <p className="text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              A Journey Through Arabian Flavors
+              Food that Unites People
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="gold" size="xl" asChild>
-                {/* <Link to="/book">
-                  Reserve Your Table
-                  <ArrowRight className="ml-2" size={20} />
-                </Link> */}
-                 <Link to="/about">
+                <Link to="/about">
                   Learn more about us
                   <ArrowRight className="ml-2" size={20} />
                 </Link>
@@ -180,6 +275,7 @@ const Index = () => {
           </div>
         </div>
 
+
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-gold/50 rounded-full flex items-start justify-center p-2">
             <div className="w-1 h-2 bg-gold rounded-full" />
@@ -187,8 +283,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Story Section - SLOWER ANIMATION */}
-     <section className="py-24 bg-pattern-arabesque">
+
+      {/* Story Section */}
+      <section className="py-24 bg-pattern-arabesque">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <p className="text-gold font-medium tracking-[0.2em] uppercase mb-2">
@@ -198,6 +295,7 @@ const Index = () => {
               The Barkaas Story
             </h2>
           </div>
+
 
           <div className="space-y-8 md:space-y-12 max-w-5xl mx-auto">
             {storyBlocks.map((block, index) => {
@@ -225,6 +323,7 @@ const Index = () => {
                       {block.description}
                     </p>
                   </div>
+
 
                   {/* SCROLL-TRIGGERED ROTATION */}
                   <div className="md:w-1/2 flex justify-center">
@@ -263,6 +362,78 @@ const Index = () => {
         </div>
       </section>
 
+
+      {/* Perfect Spot for Every Occasion Section */}
+      <section className="py-24 bg-gradient-to-b from-secondary/30 to-background relative overflow-hidden">
+        <div className="absolute inset-0 bg-pattern-arabesque opacity-5" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <p className="text-gold font-medium tracking-[0.2em] uppercase mb-2">
+              Perfect for Every Occasion
+            </p>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
+              Where Celebrations Come Alive
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Whether it's an intimate family dinner or a grand celebration, Barkaas provides the perfect setting for every special moment
+            </p>
+          </div>
+
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {occasions.map((occasion, index) => (
+              <div
+                key={occasion.title}
+                className="group relative bg-background/80 backdrop-blur-sm rounded-2xl p-8 
+                          border-2 border-gold/20 hover:border-gold/50 
+                          shadow-lg hover:shadow-2xl hover:shadow-gold/20
+                          transition-all duration-500 hover:-translate-y-2
+                          animate-fade-in-up"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                {/* Icon */}
+                <div className="mb-6 flex justify-center">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-gold/20 to-gold/10 
+                                flex items-center justify-center border-2 border-gold/30
+                                group-hover:scale-110 group-hover:border-gold/60 
+                                transition-all duration-500 group-hover:shadow-lg group-hover:shadow-gold/30">
+                    <occasion.icon className="w-10 h-10 text-gold group-hover:scale-110 transition-transform duration-500" />
+                  </div>
+                </div>
+
+
+                {/* Content */}
+                <h3 className="text-xl font-heading font-semibold text-foreground mb-3 text-center">
+                  {occasion.title}
+                </h3>
+                <p className="text-muted-foreground text-center leading-relaxed">
+                  {occasion.description}
+                </p>
+
+
+                {/* Decorative element */}
+                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-gold/30 
+                              group-hover:w-3 group-hover:h-3 transition-all duration-300" />
+              </div>
+            ))}
+          </div>
+
+
+          <div className="text-center mt-16">
+            <p className="text-foreground/80 text-lg mb-6 font-light">
+              Experience the warmth of Arabian hospitality combined with spacious seating and exceptional service
+            </p>
+            {/* <Button variant="gold-outline" size="lg" asChild className="group">
+              <Link to="/locations">
+                Find Your Nearest Location
+                <ArrowRight className="ml-2 size-4 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </Button> */}
+          </div>
+        </div>
+      </section>
+
+
       {/* Featured Dishes */}
       <section className="py-12 bg-secondary">
         <div className="container mx-auto px-4">
@@ -274,6 +445,7 @@ const Index = () => {
               Signature Dishes
             </h2>
           </div>
+
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
             {featuredDishes.map((dish, index) => (
@@ -289,11 +461,13 @@ const Index = () => {
                   />
                 </div>
 
+
                 <div className="
                     bg-background rounded-lg p-6 pt-28 text-center
                     shadow-[0_5px_20px_rgba(212,175,55,0.25)]
                     hover:shadow-[0_15px_40px_rgba(212,175,55,0.45)]
                     transition-shadow duration-300 hover:ring-1 hover:ring-[rgba(212,175,55,0.4)]
+
 
                   ">
                   <h3 className="text-xl font-heading font-semibold text-foreground mb-2">
@@ -304,6 +478,7 @@ const Index = () => {
               </div>
             ))}
           </div>
+
 
           <div className="text-center mt-12">
             <Button variant="gold-outline" size="lg" asChild>
@@ -316,11 +491,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/50 relative overflow-hidden">
+
+      {/* Testimonials Slider Section */}
+      <section className="py-20 bg-gradient-to-b from-background to-secondary/50 relative overflow-hidden testimonials-section">
         <div className="absolute inset-0 bg-pattern-arabesque opacity-5" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <p className="text-gold font-medium tracking-[0.2em] uppercase mb-2">
               What Our Guests Say
             </p>
@@ -329,42 +505,73 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.author}
-                className="group relative bg-background/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl 
-                          border border-gold/20 hover:border-gold/40 hover:shadow-2xl hover:shadow-gold/30
-                          transition-all duration-500 hover:-translate-y-2 animate-fade-in-up-slow"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                {/* Quote Icon */}
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-12 h-12 bg-gold/10 rounded-2xl flex items-center justify-center border-2 border-gold/30 group-hover:bg-gold/20 transition-colors">
-                  <Quote className="text-gold w-6 h-6" />
-                </div>
+          <div className="relative max-w-6xl mx-auto">
+            {/* Carousel */}
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-6">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="flex-[0_0_100%] min-w-0 md:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(33.333%-16px)]"
+                  >
+                    <div className="group relative bg-background/80 backdrop-blur-sm rounded-xl p-6 shadow-lg 
+                                  border border-gold/20 hover:border-gold/40 hover:shadow-xl hover:shadow-gold/20
+                                  transition-all duration-500 h-full flex flex-col">
+                      {/* Quote Icon */}
+                      {/* <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-10 h-10 bg-gold/10 rounded-xl 
+                                    flex items-center justify-center border-2 border-gold/30 group-hover:bg-gold/20 transition-colors">
+                        <Quote className="text-gold w-5 h-5" />
+                      </div> */}
 
-                {/* Stars */}
-                <div className="flex justify-center mb-4 -mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-5 h-5 ${i < testimonial.rating ? 'text-gold fill-gold' : 'text-gold/30'}`} />
-                  ))}
-                </div>
+                      {/* Stars */}
+                      <div className="flex justify-center mb-3 mt-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'text-gold fill-gold' : 'text-gold/30'}`} />
+                        ))}
+                      </div>
 
-                {/* Quote */}
-                <blockquote className="text-lg font-light italic text-foreground/90 leading-relaxed mb-6 text-center">
-                  "{testimonial.quote}"
-                </blockquote>
+                      {/* Quote */}
+                      <blockquote className="text-sm font-light italic text-foreground/90 leading-relaxed mb-4 text-center flex-grow">
+                        "{testimonial.quote}"
+                      </blockquote>
 
-               {/* Author */}
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gold/20 to-gold/10 rounded-full mx-auto mb-3 flex items-center justify-center border-2 border-gold/30 group-hover:scale-110 transition-transform">
-                    <User className="w-8 h-8 text-gold/70 group-hover:text-gold" />
+                      {/* Author */}
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-gradient-to-br from-gold/20 to-gold/10 rounded-full mx-auto mb-2 
+                                      flex items-center justify-center border-2 border-gold/30 group-hover:scale-110 transition-transform">
+                          <User className="w-6 h-6 text-gold/70 group-hover:text-gold" />
+                        </div>
+                        <h4 className="font-heading font-semibold text-foreground text-sm">{testimonial.author}</h4>
+                        <p className="text-gold/80 text-xs">{testimonial.role}</p>
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="font-heading font-semibold text-foreground">{testimonial.author}</h4>
-                  <p className="text-gold/80 text-sm">{testimonial.role}</p>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={scrollPrev}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 
+                       w-12 h-12 rounded-full bg-gold/10 border-2 border-gold/30 
+                       flex items-center justify-center hover:bg-gold/20 hover:border-gold/50 
+                       transition-all duration-300 hover:scale-110 group z-10"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-6 h-6 text-gold group-hover:scale-110 transition-transform" />
+            </button>
+
+            <button
+              onClick={scrollNext}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 
+                       w-12 h-12 rounded-full bg-gold/10 border-2 border-gold/30 
+                       flex items-center justify-center hover:bg-gold/20 hover:border-gold/50 
+                       transition-all duration-300 hover:scale-110 group z-10"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-6 h-6 text-gold group-hover:scale-110 transition-transform" />
+            </button>
           </div>
         </div>
       </section>
@@ -382,10 +589,6 @@ const Index = () => {
               Reserve your table today and create memories that last a lifetime.
             </p>
             <Button variant="gold" size="xl" asChild>
-              {/* <Link to="/book">
-                Book Your Table Now
-                <ArrowRight className="ml-2" size={20} />
-              </Link> */}
               <Link to="/about">
                 Know more
                 <ArrowRight className="ml-2" size={20} />
@@ -397,5 +600,6 @@ const Index = () => {
     </Layout>
   );
 };
+
 
 export default Index;
