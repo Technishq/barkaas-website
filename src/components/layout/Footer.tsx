@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { 
   MapContainer, 
   TileLayer, 
@@ -10,6 +10,7 @@ import {
 import { Icon } from 'leaflet';
 import logo from "@/assets/logo-navbar.png";
 
+
 // Custom gold marker for Barkaas
 const barkaasIcon = new Icon({
   iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png`,
@@ -18,6 +19,7 @@ const barkaasIcon = new Icon({
   iconAnchor: [15, 45],
   popupAnchor: [0, -40]
 });
+
 
 const restaurantLocations = [
   {
@@ -230,6 +232,7 @@ const restaurantLocations = [
 ];
 
 
+
 export const Footer = () => {
   return (
     <footer className="bg-card border-t border-border">
@@ -247,10 +250,13 @@ export const Footer = () => {
               </span>
             </Link>
             <p className="text-muted-foreground leading-relaxed mt-4">
-              Welcome to India's Largest Indo-Arabic Chain of Restaurants. 
-              Think Mandi, think Barkaas.
+              Welcome to India's Largest Indo-Arabic Chain of Restaurants.
+              <span className="block font-bold">
+                Think Mandi. Think Biryani. Think Barkaas.
+              </span>
             </p>
           </div>
+
 
           {/* Contact Info */}
           <div>
@@ -258,16 +264,44 @@ export const Footer = () => {
               Contact Us
             </h4>
             <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-muted-foreground">
-                <Phone size={18} className="text-gold shrink-0" />
-                <span>+91 84949 45678 | +91 83096 44799</span>
+              <li className="flex items-start gap-3 text-muted-foreground">
+                <MessageCircle size={18} className="text-gold shrink-0 mt-1" />
+                <div>
+                  <p className="font-medium text-foreground mb-1">For Franchisee Enquiries:</p>
+                  <a 
+                    href="https://wa.me/919741998636" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-gold transition-colors"
+                  >
+                    WhatsApp: +91 97419 98636
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3 text-muted-foreground">
+                <Phone size={18} className="text-gold shrink-0 mt-1" />
+                <div>
+                  <p className="font-medium text-foreground mb-1">For Other Enquiries:</p>
+                  <a 
+                    href="tel:+918494945678" 
+                    className="block hover:text-gold transition-colors"
+                  >
+                    +91 84949 45678
+                  </a>
+                </div>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
                 <Mail size={18} className="text-gold shrink-0" />
-                <span>info@barkaas.com</span>
+                <a 
+                  href="mailto:info@barkaas.com"
+                  className="hover:text-gold transition-colors"
+                >
+                  info@barkaas.com
+                </a>
               </li>
             </ul>
           </div>
+
 
           {/* Opening Hours + Social */}
           <div>
@@ -278,20 +312,47 @@ export const Footer = () => {
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Clock size={18} className="text-gold mt-1 shrink-0" />
                 <div>
-                  <p>Mon-Thu: 12PM - 11PM</p>
-                  <p>Fri-Sun: 12PM - 12AM</p>
+                  <p>Mon-Sun: 11:30 AM - 11:00 PM</p>
                 </div>
               </li>
             </ul>
+            
+            <h4 className="text-lg font-heading font-semibold text-gold mb-4">
+              Follow Us
+            </h4>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-gold hover:scale-110 transition-all duration-300" aria-label="Instagram">
-                <Instagram size={22} />
+              <a 
+                href="https://instagram.com/barkaas" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative group"
+                aria-label="Instagram"
+              >
+                <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-foreground/10 border-2 border-gold/30 transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_0_20px_rgba(212,175,55,0.6)] group-hover:scale-110">
+                  <Instagram 
+                    size={24} 
+                    className="text-gold transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]" 
+                  />
+                </div>
               </a>
-              <a href="#" className="text-muted-foreground hover:text-gold hover:scale-110 transition-all duration-300" aria-label="Facebook">
-                <Facebook size={22} />
+              
+              <a 
+                href="https://facebook.com/barkaas" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative group"
+                aria-label="Facebook"
+              >
+                <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-foreground/10 border-2 border-gold/30 transition-all duration-300 group-hover:border-gold group-hover:shadow-[0_0_20px_rgba(212,175,55,0.6)] group-hover:scale-110">
+                  <Facebook 
+                    size={24} 
+                    className="text-gold transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]" 
+                  />
+                </div>
               </a>
             </div>
           </div>
+
 
           {/* React Leaflet Map */}
          <div className="rounded-2xl overflow-hidden shadow-2xl shadow-gold/20 border border-gold/20 hover:border-gold/50 transition-all duration-300">
@@ -299,7 +360,7 @@ export const Footer = () => {
               center={[20.5937, 78.9629]}
               zoom={5}
               style={{ height: '340px', width: '100%' }}
-              scrollWheelZoom="center"  // Smooth zoom on cursor
+              scrollWheelZoom="center"
               zoomControl={true}
               doubleClickZoom={true}
             >
@@ -346,7 +407,9 @@ export const Footer = () => {
             </MapContainer>
           </div>
 
+
         </div>
+
 
         <div className="border-t border-border mt-12 pt-8 text-center text-sm">
           <p className="text-muted-foreground">

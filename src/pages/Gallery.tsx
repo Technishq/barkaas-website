@@ -5,8 +5,45 @@ import { cn } from "@/lib/utils";
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [selectedImage, setSelectedImage] = useState<{ id: number; src: string; alt: string; category: string } | null>(null);
-  const [galleryImages, setGalleryImages] = useState<{ id: number; src: string; alt: string; category: string }[]>([]);
+  const [selectedImage, setSelectedImage] = useState<{ id: number; src: string; alt: string; category: string; subcategory?: string } | null>(null);
+  const [galleryImages, setGalleryImages] = useState<{ id: number; src: string; alt: string; category: string; subcategory?: string }[]>([]);
+
+  // Define your food images with categories
+  const foodImageConfig: { fileName: string; name: string; subcategory: string }[] = [
+    // Mandi
+    { fileName: "0X4A9932", name: "", subcategory: "Mandi" },
+    { fileName: "SMP_3896", name: "", subcategory: "Mandi" },
+    { fileName: "SMP_3900", name: "", subcategory: "Mandi" },
+    { fileName: "SMP_3955", name: "", subcategory: "Mandi" },
+    { fileName: "SMP_4117", name: "", subcategory: "Mandi" },
+    { fileName: "SMP_4249", name: "", subcategory: "Mandi" },
+    { fileName: "SMP_4261", name: "", subcategory: "Mandi" },
+    // Biryanis
+    { fileName: "SMP_3530", name: "", subcategory: "Biryani" },
+    { fileName: "SMP_3994", name: "", subcategory: "Biryani" },
+    // Starters
+    { fileName: "010A1851", name: "", subcategory: "Starter" },
+    { fileName: "010A1858", name: "", subcategory: "Starter" },
+    { fileName: "SMP_3392", name: "", subcategory: "Starter" },
+    { fileName: "SMP_3613", name: "", subcategory: "Starter" },
+    { fileName: "SMP_3738", name: "", subcategory: "Starter" },
+    { fileName: "SMP_3778", name: "", subcategory: "Starter" },
+    { fileName: "SMP_4008", name: "", subcategory: "Starter" },
+    { fileName: "SMP_4021", name: "", subcategory: "Starter" },
+    { fileName: "SMP_4239", name: "", subcategory: "Starter" },
+    { fileName: "SMP_4288", name: "", subcategory: "Starter" },
+    // Desserts
+    { fileName: "010A1765", name: "", subcategory: "Dessert" },
+    { fileName: "010A1828", name: "", subcategory: "Dessert" },
+    { fileName: "SMP_3558", name: "", subcategory: "Dessert" },
+    { fileName: "SMP_3658", name: "", subcategory: "Dessert" },
+    { fileName: "SMP_3687", name: "", subcategory: "Dessert" },
+    { fileName: "SMP_4283", name: "", subcategory: "Dessert" },
+    // Drinks
+    { fileName: "010A1576", name: "", subcategory: "Drink" },
+    { fileName: "010A1647", name: "", subcategory: "Drink" },
+    { fileName: "010A1682", name: "", subcategory: "Drink" },
+  ];
 
   useEffect(() => {
     const ambienceModules = import.meta.glob<{ default: string }>('/src/assets/ambience/*.{jpg,jpeg,png,webp}', { eager: true });
@@ -24,17 +61,32 @@ const Gallery = () => {
 
     const foodImages = Object.entries(foodModules).map(([path, mod], index) => {
       const fileName = path.split('/').pop()?.split('.')[0] || `food-${index}`;
+      const config = foodImageConfig.find(item => item.fileName === fileName);
+      
       return {
         id: ambienceImages.length + index + 1,
         src: mod.default, 
-        alt: `${fileName.charAt(0).toUpperCase() + fileName.slice(1)} Dish`,
-        category: "Food" as const
+        alt: config?.name || `${fileName.charAt(0).toUpperCase() + fileName.slice(1)} Dish`,
+        category: "Food" as const,
+        subcategory: config?.subcategory,
+        fileName // Store filename for sorting
       };
     });
 
-    setGalleryImages([...ambienceImages, ...foodImages]);
-  }, []);
+    // Sort food images based on foodImageConfig order
+    const sortedFoodImages = foodImages.sort((a, b) => {
+      const aIndex = foodImageConfig.findIndex(item => item.fileName === a.fileName);
+      const bIndex = foodImageConfig.findIndex(item => item.fileName === b.fileName);
+      
+      // If not in config list, put at end
+      const aOrder = aIndex === -1 ? 9999 : aIndex;
+      const bOrder = bIndex === -1 ? 9999 : bIndex;
+      
+      return aOrder - bOrder;
+    });
 
+    setGalleryImages([...ambienceImages, ...sortedFoodImages]);
+  }, []);
 
   const categories = ["All", "Food", "Ambiance"];
 
@@ -103,7 +155,7 @@ const Gallery = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                   <p className="text-foreground font-medium">{image.alt}</p>
-                  <p className="text-gold text-sm">{image.category}</p>
+                  <p className="text-gold text-sm">{image.subcategory || image.category}</p>
                 </div>
               </div>
             ))}
