@@ -12,7 +12,7 @@ import heroImage4 from "@/assets/ambience/RON3063.jpg";
 import img1 from "@/assets/mainpage-1.png";
 import img2 from "@/assets/mainpage-2.png";
 import img3 from "@/assets/mainpage-3.png";
-import img4 from "@/assets/mainpage-4.png";
+import img4 from "@/assets/food/DSC1137.jpg";
 import img5 from "@/assets/mainpage-5.png";
 import img6 from "@/assets/mainpage-6.png";
 import img7 from "@/assets/mainpage-7.png";
@@ -44,7 +44,7 @@ const storyBlocks = [
     title: "A Glass for Every Mood",
     subtitle: "A Refreshment",
     description:
-      "Complete your experience with our wide range of drinks - fresh juices, vibrant mocktails, creamy faloodas, refreshing mojitos, classic lassi and buttermilk, indulgent milkshakes and thick shakes, exotic fruit blends, sundaes, sodas, ice blends, and Barkaas special mixes crafted to refresh and delight.",
+      "Complete your experience with our wide range of drinks - fresh juices, saudi champagne, vibrant mocktails, creamy faloodas, refreshing mojitos, classic lassi and buttermilk, indulgent milkshakes and thick shakes, exotic fruit blends, sundaes, sodas, ice blends, and Barkaas special mixes crafted to refresh and delight.",
     image: img4,
   },
 ];
@@ -141,8 +141,8 @@ const testimonials = [
 
 const featuredDishes = [
   { name: "Big Daddy Mandi", description: "A grand platter of fragrant basmati rice slow-cooked with tender, generously seasoned meat, infused with traditional spices and finished with roasted nuts for a bold, celebratory feast.", image: img5 },
-  { name: "Murg Musallam Mandi", description: "Whole chicken marinated in aromatic spices, slow-roasted to juicy perfection and served atop long-grain basmati rice, delicately perfumed and garnished with roasted onions and spices.", image: img6 },
-  { name: "Mutton Shoulder Mandi", description: "Succulent mutton shoulder cooked low and slow until melt-in-the-mouth tender, paired with richly spiced basmati rice and finished with a nutty garnish for a deeply comforting experience.", image: img7 },
+  { name: "BBQ Chicken Mandi", description: "Succulent whole chicken marinated in handcrafted BBQ spices, slow-grilled for a rich smoky finish, served atop fragrant basmati rice infused with traditional Mandi spices and roasted onions.", image: img6 },
+  { name: "Mutton Raan Mandi", description: "Succulent mutton shoulder cooked low and slow until melt-in-the-mouth tender, paired with richly spiced basmati rice and finished with a nutty garnish for a deeply comforting experience.", image: img7 },
 ];
 
 const heroImages = [
