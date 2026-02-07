@@ -412,6 +412,9 @@ export const Footer = () => {
 
 
         <div className="border-t border-border mt-12 pt-8 text-center text-sm">
+          <p className="text-muted-foreground mb-1">
+            Firm Name: Karthikeya Foods and Beverages | GST: 29ABAFK7979F1ZS
+          </p>
           <p className="text-muted-foreground">
             &copy; {new Date().getFullYear()}{' '}
             Designed & Developed by{' '}
@@ -426,6 +429,7 @@ export const Footer = () => {
             All rights reserved.
           </p>
         </div>
+
       </div>
     </footer>
   );
